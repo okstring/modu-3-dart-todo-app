@@ -51,7 +51,7 @@ class TodoRepositoryImpl implements TodoRepository {
       case TodoCondition.isAscending:
         return todos.sorted((a, b) => a.createdAt.compareTo(b.createdAt));
       // 날짜 순서로 내림차순
-      case TodoCondition.isDecending:
+      case TodoCondition.isDescending:
         return todos.sorted((a, b) => b.createdAt.compareTo(a.createdAt));
       // 완료된 것만
       case TodoCondition.isCompleted:

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:todo_app/data_source/log_data_source.dart';
 import 'package:todo_app/data_source/log_data_source_impl.dart';
 import 'package:todo_app/data_source/todo_data_source.dart';
@@ -20,10 +22,17 @@ void main() async {
   );
   final logOperator = LogOperator(logRepository);
 
-  final todoCli = TodoCLIManager(
-    todoRepository: todoRepository,
-    logOperator: logOperator,
-  );
+  while (true) {
+    TodoCliManager.start();
+    final command = stdin.readLineSync() ?? '-1';
+    final result = await TodoCliManager.executeFromInput(
+      command,
+      todoRepository,
+      logOperator,
+    );
 
-  todoCli.run();
+    if (result.shouldExit) {
+      break;
+    }
+  }
 }

@@ -8,6 +8,6 @@ class LogOperator {
 
   Future<void> log(String message) async {
     String now = DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
-    await _logRepository.saveLog('[$now] $message');
+    await _logRepository.saveLog('[$now] $message\n');
   }
 }
