@@ -1,16 +1,16 @@
 import 'dart:io';
 import 'package:todo_app/enum/log_condition.dart';
 import 'package:todo_app/enum/todo_condition.dart';
-import 'package:todo_app/manage/log_operator.dart';
+import 'package:todo_app/manager/log_operator.dart';
 import 'package:todo_app/model/todo.dart';
 import 'package:todo_app/repository/todo_repository.dart';
 
-class TodoCLI {
+class TodoCLIManager {
 
   final TodoRepository todoRepository;
   final LogOperator logOperator;
 
-  TodoCLI({
+  TodoCLIManager({
     required this.todoRepository,
     required this.logOperator,
   });
