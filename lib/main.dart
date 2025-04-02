@@ -24,7 +24,7 @@ void main() async {
 
   while (true) {
     TodoCliManager.start();
-    final command = stdin.readLineSync() ?? '-1';
+    final command = stdin.readLineSync();
     final result = await TodoCliManager.executeFromInput(
       command,
       todoRepository,
