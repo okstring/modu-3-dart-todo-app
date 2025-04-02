@@ -53,7 +53,7 @@ class Todo {
 
   @override
   String toString() {
-    return '[${completed ? '✓' : ' '}] $title (${DateFormat('yyyy-MM-dd hh:mm').format(createdAt)})';
+    return '[${completed ? '✓' : ' '}] id:$id  $title (${DateFormat('yyyy-MM-dd hh:mm').format(createdAt)})';
   }
 
   @override

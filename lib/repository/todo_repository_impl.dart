@@ -23,14 +23,14 @@ class TodoRepositoryImpl implements TodoRepository {
 
     final todos = await getTodos();
     todos.add(newTodo);
-    _todoDataSource.writeTodos(todos.map((e) => e.toJson()).toList());
+    await _todoDataSource.writeTodos(todos.map((e) => e.toJson()).toList());
   }
 
   @override
   Future<void> deleteTodo(int id) async {
     final todos = await getTodos();
     todos.removeWhere((e) => e.id == id);
-    _todoDataSource.writeTodos(todos.map((e) => e.toJson()).toList());
+    await _todoDataSource.writeTodos(todos.map((e) => e.toJson()).toList());
   }
 
   @override
@@ -71,7 +71,7 @@ class TodoRepositoryImpl implements TodoRepository {
         resp
             .map((e) => e.id == id ? e.copyWith(completed: !e.completed) : e)
             .toList();
-    _todoDataSource.writeTodos(todos.map((e) => e.toJson()).toList());
+    await _todoDataSource.writeTodos(todos.map((e) => e.toJson()).toList());
     return todos.where((e) => e.id == id).first.completed;
   }
 
@@ -80,6 +80,6 @@ class TodoRepositoryImpl implements TodoRepository {
     final resp = await getTodos();
     final todos =
         resp.map((e) => e.id == id ? e.copyWith(title: newTitle) : e).toList();
-    _todoDataSource.writeTodos(todos.map((e) => e.toJson()).toList());
+    await _todoDataSource.writeTodos(todos.map((e) => e.toJson()).toList());
   }
 }
