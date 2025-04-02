@@ -64,7 +64,7 @@ package "Dart Todo Application" {
       - Future<String> readLog()
   }
 
-  class LogRepositoryImpl implements LogRepository {
-  }
+  class LogRepositoryImpl implements LogRepository {}
+}
 
 @enduml
