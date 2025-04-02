@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class Todo {
   final int userId;
   final int id;
@@ -51,7 +53,7 @@ class Todo {
 
   @override
   String toString() {
-    return 'Todo(userId: $userId, id: $id, title: $title, completed: $completed, createdAt: $createdAt)';
+    return '[${completed ? '✓' : ' '}] $title (${DateFormat('yyyy-MM-dd hh:mm').format(createdAt)})';
   }
 
   @override
