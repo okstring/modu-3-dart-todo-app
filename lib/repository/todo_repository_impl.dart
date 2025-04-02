@@ -44,7 +44,7 @@ class TodoRepositoryImpl implements TodoRepository {
     TodoCondition condition = TodoCondition.base,
   }) async {
     final resp = await _todoDataSource.readTodos();
-    final todos = List<Todo>.from(resp);
+    final todos = resp.map((e) => Todo.fromJson(e)).toList();
 
     switch (condition) {
       // 날짜 순서로 오름차순
