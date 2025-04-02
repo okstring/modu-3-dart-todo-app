@@ -1,6 +1,8 @@
 import 'package:todo_app/data_source/todo_data_source.dart';
+import 'package:todo_app/enum/todo_condition.dart';
 import 'package:todo_app/model/todo.dart';
 import 'package:todo_app/repository/todo_repository.dart';
+import 'package:collection/collection.dart';
 
 class TodoRepositoryImpl implements TodoRepository {
   final TodoDataSource _todoDataSource;
@@ -38,24 +40,46 @@ class TodoRepositoryImpl implements TodoRepository {
   }
 
   @override
-  Future<List<Todo>> getTodos({bool? isAscending, bool? isCompleted}) async {
-    final todos = await _todoDataSource.readTodos();
-    return List<Todo>.from(todos);
+  Future<List<Todo>> getTodos({
+    TodoCondition condition = TodoCondition.base,
+  }) async {
+    final resp = await _todoDataSource.readTodos();
+    final todos = List<Todo>.from(resp);
+
+    switch (condition) {
+      // 날짜 순서로 오름차순
+      case TodoCondition.isAscending:
+        return todos.sorted((a, b) => a.createdAt.compareTo(b.createdAt));
+      // 날짜 순서로 내림차순
+      case TodoCondition.isDecending:
+        return todos.sorted((a, b) => b.createdAt.compareTo(a.createdAt));
+      // 완료된 것만
+      case TodoCondition.isCompleted:
+        return todos.where((e) => e.completed).toList();
+      // 미완료된 것만
+      case TodoCondition.isNotCompleted:
+        return todos.where((e) => !e.completed).toList();
+      case TodoCondition.base:
+        return todos;
+    }
   }
 
   @override
-  Future<void> toggleTodo(int id) async {
-    final todos = await getTodos();
-    final result =
-        todos
+  Future<bool> toggleTodo(int id) async {
+    final resp = await getTodos();
+    final todos =
+        resp
             .map((e) => e.id == id ? e.copyWith(completed: !e.completed) : e)
             .toList();
-    _todoDataSource.writeTodos(result.map((e) => e.toJson()).toList());
+    _todoDataSource.writeTodos(todos.map((e) => e.toJson()).toList());
+    return todos.where((e) => e.id == id).first.completed;
   }
 
   @override
-  Future<Todo> updateTodo(int id, String newTitle) {
-    // TODO: implement updateTodo
-    throw UnimplementedError();
+  Future<void> updateTodo(int id, String newTitle) async {
+    final resp = await getTodos();
+    final todos =
+        resp.map((e) => e.id == id ? e.copyWith(title: newTitle) : e).toList();
+    _todoDataSource.writeTodos(todos.map((e) => e.toJson()).toList());
   }
 }
