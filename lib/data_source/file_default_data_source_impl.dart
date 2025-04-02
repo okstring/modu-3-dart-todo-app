@@ -14,7 +14,7 @@ abstract class FileDefaultDataSource {
     return File(path).readAsString();
   }
 
-  Future<void> writeFile(String path, String contents) async {
-    await File(path).writeAsString(contents);
+  Future<void> writeFile(String path, String contents, {FileMode? mode}) async {
+    await File(path).writeAsString(contents, mode: mode ?? FileMode.write);
   }
 }

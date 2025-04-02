@@ -21,10 +21,10 @@ class TodoDataSourceImpl extends FileDefaultDataSource
   }
 
   @override
-  Future<void> writeTodos(Map<String, dynamic> todo) async {
+  Future<void> writeTodos(List<Map<String, dynamic>> todos) async {
     if (!(await isFileExist(_todoPath))) {
       await createFile(_todoPath);
     }
-    await writeTodos(todo);
+    await writeTodos(todos);
   }
 }
