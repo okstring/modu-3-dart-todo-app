@@ -4,7 +4,7 @@ class Todo {
   final String title;
   final bool completed;
   final DateTime createdAt;
-  
+
   const Todo({
     required this.userId,
     required this.id,
@@ -35,7 +35,7 @@ class Todo {
       'id': id,
       'title': title,
       'completed': completed,
-      'createdAt': createdAt.millisecondsSinceEpoch,
+      'createdAt': createdAt.toString(),
     };
   }
 
@@ -57,21 +57,20 @@ class Todo {
   @override
   bool operator ==(covariant Todo other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.userId == userId &&
-      other.id == id &&
-      other.title == title &&
-      other.completed == completed &&
-      other.createdAt == createdAt;
+
+    return other.userId == userId &&
+        other.id == id &&
+        other.title == title &&
+        other.completed == completed &&
+        other.createdAt == createdAt;
   }
 
   @override
   int get hashCode {
     return userId.hashCode ^
-      id.hashCode ^
-      title.hashCode ^
-      completed.hashCode ^
-      createdAt.hashCode;
+        id.hashCode ^
+        title.hashCode ^
+        completed.hashCode ^
+        createdAt.hashCode;
   }
 }
