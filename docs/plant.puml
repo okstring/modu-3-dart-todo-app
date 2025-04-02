@@ -21,10 +21,7 @@ package "Dart Todo Application" {
 
   interface TodoDataSource {
       + Future<List<Map<String, dynamic>>> readTodos()
-      + Future<Map<String, dynamic>> readTodoById(int id)
       + Future<bool> writeTodo(Map<String, dynamic> todo)
-      + Future<Map<String, dynamic>> updateTodo(Map<String, dynamic> todo)
-      + Future<bool> deleteTodo(int id)
     }
 
   interface FileDefaultDataSource {
