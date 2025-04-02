@@ -27,7 +27,3 @@ void main() async {
 
   todoCli.run();
 }
-
-class TodoOperator {
-  
-}

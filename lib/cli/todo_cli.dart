@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:todo_app/enum/log_condition.dart';
+import 'package:todo_app/enum/todo_condition.dart';
 import 'package:todo_app/manage/log_operator.dart';
 import 'package:todo_app/model/todo.dart';
 import 'package:todo_app/repository/todo_repository.dart';
@@ -24,7 +25,26 @@ class TodoCLI {
 
       switch (LogCondition.convertLogCondition(selectedNum)) {
         case LogCondition.show:
-          final todos = await todoRepository.getTodos();
+        String? conditionNum = stdin.readLineSync();
+        List<Todo> todos = await todoRepository.getTodos();
+        print('\n[할 일 목록]');
+        if (conditionNum == '1') {
+          todos = await todoRepository.getTodos(
+            condition: TodoCondition.isAscending,
+          );
+        } else if (conditionNum == '2') {
+          todos = await todoRepository.getTodos(
+            condition: TodoCondition.isDecending,
+          );
+        } else if (conditionNum == '3') {
+          todos = await todoRepository.getTodos(
+            condition: TodoCondition.isCompleted,
+          );
+        } else if (conditionNum == '4') {
+          todos = await todoRepository.getTodos(
+            condition: TodoCondition.isNotCompleted,
+          );
+        }
           showTodos(todos);
           break;
         case LogCondition.add:
