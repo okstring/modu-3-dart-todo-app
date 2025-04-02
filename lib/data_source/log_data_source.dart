@@ -1,4 +1,4 @@
 abstract interface class LogDataSource {
-  Future<bool> writeLog();
+  Future<void> writeLog(String contents);
   Future<String> readLog();
 }
