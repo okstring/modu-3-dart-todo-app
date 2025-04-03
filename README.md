@@ -15,22 +15,22 @@
 
 ### 아키텍처
 
-### 데이터 레이어
+### 
 
 - DataSource: 파일 시스템과의 직접적인 상호작용을 담당합니다.
   - `FileDefaultDataSource`: 기본 파일 조작 기능을 제공합니다.
   - `LogDataSource`: 로그 파일 조작을 담당합니다.
   - `TodoDataSource`: Todo 데이터 파일 조작을 담당합니다.
 
-### 도메인 레이어
+### 
 
 - Repository: 비즈니스 로직과 데이터 변환을 처리합니다.
   - `LogRepository`: 로그 관련 비즈니스 로직을 처리합니다.
   - `TodoRepository`: Todo 관련 비즈니스 로직을 처리합니다.
 
-### 프레젠테이션 레이어
 
-- CLI Manager: 사용자 인터페이스와 입출력을 처리합니다.
+
+- Manager: 사용자 인터페이스와 입출력을 처리합니다.
   - `TodoCliManager`: CLI 인터페이스 및 사용자 입력 처리를 담당합니다.
   - `LogOperator`: 로깅 작업을 관리합니다.
 
